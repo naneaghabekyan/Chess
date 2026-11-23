@@ -86,6 +86,7 @@ namespace Chess
                 //    History.AddMatchPlayer(matchId, p1.Id, tempPlayer == p1 ? "Win" : "Lose");
                 //    History.AddMatchPlayer(matchId, p2.Id, tempPlayer == p2 ? "Win" : "Lose");
                 //}
+                //
             }
         }
 
