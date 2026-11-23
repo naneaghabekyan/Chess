@@ -15,12 +15,11 @@ namespace Chess
         : base(p1, p2)
         {
         }
-        public override Player GamePlay()
+
+
+        public override string GetMatchType()
         {
-            Game newGame = new Game();
-
-           return newGame.GameLogic(Player1, Player2);
+            return "casual";
         }
-
     }
 }

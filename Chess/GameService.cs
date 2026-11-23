@@ -12,7 +12,7 @@ using Models;
 
 namespace Chess
 {
-    public class GameRoom
+    public class GameService
     {
 
         private Queue<Player> queue = new Queue<Player>();
@@ -71,22 +71,7 @@ namespace Chess
 
                 MatchID++;
                 return match;
-                //match.Start();
-                //Player tempPlayer = match.GamePlay();
-                //match.End();
-
-                //int matchId = History.AddMatch(matchType.ToLower(),match.StartTime, match.EndTime);
-                //if (tempPlayer == null)
-                //{
-                //    History.AddMatchPlayer(matchId, p1.Id, "Draw");
-                //    History.AddMatchPlayer(matchId, p2.Id, "Draw");
-                //}
-                //else
-                //{
-                //    History.AddMatchPlayer(matchId, p1.Id, tempPlayer == p1 ? "Win" : "Lose");
-                //    History.AddMatchPlayer(matchId, p2.Id, tempPlayer == p2 ? "Win" : "Lose");
-                //}
-                //
+           
             }
         }
 
@@ -99,12 +84,32 @@ namespace Chess
             return match;
         }
 
+        public bool MakeMove(int id, string pos)
+        {
+            Match match = ActiveMatches[id];
+
+            bool result = match.NewGame.MakeMove(pos);
+
+            if (result && match.NewGame.GameStatus)
+            {
+                match.End();
+            }
+
+            return result;
+        }
+
+        public bool GameIsOver(int id)
+        {
+            Match match = ActiveMatches[id];
+            return match.NewGame.GameStatus;
+        }
+
         public List<MatchHistory> ShowHistory()
         {
             return History.GetMatchHistory();
         }
 
-
+       
 
         public List<Player> ShowLeaderBoard()
         {

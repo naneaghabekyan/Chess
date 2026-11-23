@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.Metrics;
+using System.Numerics;
 using System.Threading;
 using Microsoft.Data.SqlClient;
 using Models;
@@ -44,6 +45,23 @@ namespace Data
           
             }
            
+        }
+
+        public void UpdateRank(Player player)
+        {
+            using (SqlConnection connaction = db.CreateConnection())
+            {
+                connaction.Open();
+                string query = "Update Players Set Rank = @rank Where PlayerID = @id";
+                using (SqlCommand command = new SqlCommand(query, connaction))
+                {
+                    command.Parameters.AddWithValue("@rank", player.Rank);
+                    command.Parameters.AddWithValue("@id", player.Id);
+
+                    command.ExecuteNonQuery();
+                }
+
+            }
         }
 
         public List<Player> GetLeaderBoard()

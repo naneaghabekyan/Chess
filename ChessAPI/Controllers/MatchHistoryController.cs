@@ -8,7 +8,7 @@ namespace ChessAPI.Controllers
     public class MatchHistoryController : ControllerBase
     {
 
-        private GameRoom room = new GameRoom();
+        private GameService room = new GameService();
 
         [HttpGet("history")]
         public IActionResult ShowHistory()

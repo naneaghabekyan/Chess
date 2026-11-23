@@ -1,4 +1,5 @@
-﻿using Models;
+﻿using Data;
+using Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,13 +17,17 @@ namespace Chess
         : base(p1, p2)
         {
         }
-        public override Player GamePlay()
+        public override void End()
         {
-            Game newGame = new Game();
-            Player player = newGame.GameLogic(Player1, Player2);
-            player.Rank += 80;
-            return player;
+            base.End();
+            Winner.Rank += 80;
+            PlayerRepository players = new PlayerRepository();
+            players.UpdateRank(Winner);
         }
 
+        public override string GetMatchType()
+        {
+            return "ranked";
+        }
     }
 }

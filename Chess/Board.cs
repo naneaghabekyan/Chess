@@ -13,7 +13,6 @@ namespace Chess
     public class Board
     {
         public Figure[,] ChessBoard { get; private set; }
-        public bool GameIsOver { get; private set; } = false;
 
         private Arqa _Arqa = new Arqa(true);
         private Arqa _arqa = new Arqa(false);
@@ -61,28 +60,28 @@ namespace Chess
         }
 
 
-        public void PrintBoard()
-        {
-            Console.WriteLine("   A B C D E F G H");
-            Console.WriteLine("  ----------------");
+        //public void PrintBoard()
+        //{
+        //    Console.WriteLine("   A B C D E F G H");
+        //    Console.WriteLine("  ----------------");
 
-            for (int i = 0; i < 8; i++)
-            {
-                Console.Write(8 - i + "|" + " ");
-                for (int j = 0; j < 8; j++)
-                {
-                    if (ChessBoard[i, j] != null)
-                        Console.Write(ChessBoard[i, j].SymbolName + " ");
-                    else
-                        Console.Write(". ");
-                }
+        //    for (int i = 0; i < 8; i++)
+        //    {
+        //        Console.Write(8 - i + "|" + " ");
+        //        for (int j = 0; j < 8; j++)
+        //        {
+        //            if (ChessBoard[i, j] != null)
+        //                Console.Write(ChessBoard[i, j].SymbolName + " ");
+        //            else
+        //                Console.Write(". ");
+        //        }
 
-                Console.WriteLine("\n");
-            }
+        //        Console.WriteLine("\n");
+        //    }
 
-        }
+        //}
 
-        public bool Move(int startcol, int startrow, int endcol, int endrow, bool playercol)
+        public bool MoveValidation(int startcol, int startrow, int endcol, int endrow, bool playercol)
         {
 
             if (ChessBoard[startrow, startcol] != null
@@ -124,7 +123,6 @@ namespace Chess
 
                 if (Shax(playercol))
                 {
-                    Console.WriteLine("King is under shax!");
                     ChessBoard[startrow, startcol] = ChessBoard[endrow, endcol];
                     ChessBoard[endrow, endcol] = figure;
 

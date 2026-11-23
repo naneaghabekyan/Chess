@@ -8,7 +8,7 @@ namespace ChessAPI.Controllers
     public class PlayersController : ControllerBase
     {
 
-        private GameRoom room = new GameRoom();
+        private GameService room = new GameService();
 
         [HttpGet("leaderboard")]
         public IActionResult ShowLeaderBoard()

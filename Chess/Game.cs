@@ -13,62 +13,46 @@ namespace Chess
     public class Game
     {
 
-        public Board _board = new Board(); 
+        public Board _board = new Board();
+        public bool GameStatus {  get; set; }
+        public bool WinnerColor {  get; set; }
+        private bool CurrentPlayer = true;
+        
+        
 
-        public Player GameLogic(Player p1, Player p2)
+
+        public bool MakeMove(string position)
         {
-            Player temp;
-            bool flag = true;
-            string _position;
+
             int _startcol;
             int _startrow;
             int _endcol;
             int _endrow;
 
-            _board.PrintBoard();
+            
+            _startcol = position[0] - 'A';
+            _startrow = 8 - (position[1] - '0');
+            _endcol = position[2] - 'A';
+            _endrow = 8 - (position[3] - '0');
 
 
-            while (true)
+
+            if (!(_board.MoveValidation(_startcol, _startrow, _endcol,_endrow, CurrentPlayer)))
             {
-                temp = flag ? p1 : p2;
-
-                if (_board.Shax(flag))
-                {
-                    Console.WriteLine("King is under shax!");
-                }
-                Console.Write($"{temp.Nickname}: Your move:  ");
-                
-
-                while (true)
-                {
-                    _position = Console.ReadLine();
-                    _startcol = _position[0] - 'A';
-                    _startrow = 8 - (_position[1] - '0');
-                    _endcol = _position[2] - 'A';
-                    _endrow = 8 - (_position[3] - '0');
-
-
-                    if (_board.Move(_startcol, _startrow, _endcol,_endrow, flag))
-                        break;
-
-                    
-                    Console.Write("Invalid move. Try again: ");
-                }
-
-                Console.Clear();
-
-                _board.PrintBoard();
-
-                if (_board.Mat(!flag))
-                {
-                    Console.WriteLine("This is MAT!");
-                    Console.WriteLine($"{temp.Nickname}: Wins!  ");
-                    return temp;
-                }
-
-                flag = !flag;
+                return false;
             }
+
+            if(_board.Mat(!CurrentPlayer))
+            {
+                WinnerColor = CurrentPlayer;
+                GameStatus = true;
+            }
+
+            CurrentPlayer = !CurrentPlayer;
+            return true;
         }
+
+
     }
 }
 
