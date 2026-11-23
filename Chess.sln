@@ -1,0 +1,45 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35521.163
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chess", "Chess\Chess.csproj", "{C7435739-4E6B-405B-AFAF-C8192992CA11}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{6EE4C859-420F-450E-85C7-DEAC06DA2950}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{F1624C78-704F-4E1D-AE6E-4FD34C94AB84}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChessAPI", "ChessAPI\ChessAPI.csproj", "{BE032D54-58A7-4CFA-A5EE-09C56B23C758}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6EE4C859-420F-450E-85C7-DEAC06DA2950} = {6EE4C859-420F-450E-85C7-DEAC06DA2950}
+		{C7435739-4E6B-405B-AFAF-C8192992CA11} = {C7435739-4E6B-405B-AFAF-C8192992CA11}
+		{F1624C78-704F-4E1D-AE6E-4FD34C94AB84} = {F1624C78-704F-4E1D-AE6E-4FD34C94AB84}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C7435739-4E6B-405B-AFAF-C8192992CA11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7435739-4E6B-405B-AFAF-C8192992CA11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7435739-4E6B-405B-AFAF-C8192992CA11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7435739-4E6B-405B-AFAF-C8192992CA11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6EE4C859-420F-450E-85C7-DEAC06DA2950}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6EE4C859-420F-450E-85C7-DEAC06DA2950}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6EE4C859-420F-450E-85C7-DEAC06DA2950}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6EE4C859-420F-450E-85C7-DEAC06DA2950}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1624C78-704F-4E1D-AE6E-4FD34C94AB84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1624C78-704F-4E1D-AE6E-4FD34C94AB84}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1624C78-704F-4E1D-AE6E-4FD34C94AB84}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1624C78-704F-4E1D-AE6E-4FD34C94AB84}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE032D54-58A7-4CFA-A5EE-09C56B23C758}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE032D54-58A7-4CFA-A5EE-09C56B23C758}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE032D54-58A7-4CFA-A5EE-09C56B23C758}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE032D54-58A7-4CFA-A5EE-09C56B23C758}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
