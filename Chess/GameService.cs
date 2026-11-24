@@ -22,28 +22,14 @@ namespace Chess
 
         private int MatchID = 1;
 
-        public void RegisterPlayer(Player player)
-        {
-            if (Players.CheckPlayerExists(player))
-            {
-                throw new PlayerExistsException("Player already exists!");
-            }
-
-            player.Id = Players.AddPlayer(player);
-
-        }
+       
 
         public void AddQueue(Player player)
         {
-            if (Players.CheckPlayerExists(player))
-            {
-                queue.Enqueue(player);
-            }
-            else
-            {
-                throw new PlayerDoesNotExistException("Player does not exist!");
-            }
+            queue.Enqueue(player);
+           
         }
+
 
 
         public Match JoinMatch(string matchType)

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Chess;
+using Models;
 
 namespace ChessAPI.Controllers
 {
@@ -8,17 +9,24 @@ namespace ChessAPI.Controllers
     public class GameController : ControllerBase
     {
 
-        private readonly GameService room;
+        private readonly GameService game;
 
+        [HttpPost("queue")]
+        public IActionResult AddToQueue([FromBody] Player player)
+        {
+            game.AddQueue(player);
+
+            return Ok("Player added to queue!");
+        }
         public GameController(GameService room)
         {
-            this.room = room;
+            this.game = room;
         }
 
         [HttpPost("match")]
         public IActionResult FindMatch(string type)
         {
-            Match match = room.JoinMatch(type);
+            Match match = game.JoinMatch(type);
 
             return Ok(match);
         }
@@ -26,7 +34,7 @@ namespace ChessAPI.Controllers
         [HttpPost("match/{matchid}/start")]
         public IActionResult StartMatch(int matchid)
         {
-            Match match = room.StartMatch(matchid);
+            Match match = game.StartMatch(matchid);
 
             return Ok(match);
         }
@@ -34,7 +42,7 @@ namespace ChessAPI.Controllers
         [HttpPost("match/{matchid}/move")]
         public IActionResult MakeMove(int matchid, [FromBody] string position)
         {
-            bool result = room.MakeMove(matchid, position);
+            bool result = game.MakeMove(matchid, position);
 
             if (!result)
             {
@@ -47,7 +55,7 @@ namespace ChessAPI.Controllers
         [HttpGet("match/{matchid}/end")]
         public IActionResult CheckGameIsOver(int matchid) 
         {
-            bool result = room.GameIsOver(matchid);
+            bool result = game.GameIsOver(matchid);
 
             if (result)
             {

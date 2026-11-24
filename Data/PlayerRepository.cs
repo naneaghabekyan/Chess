@@ -12,39 +12,55 @@ namespace Data
     {
         private DatabaseConnection db = new DatabaseConnection();
 
-        public int AddPlayer(Player player)
+        public void AddPlayer(Player player)
         {
             using (SqlConnection connection = db.CreateConnection())
             {
                 connection.Open();
 
-                string query = "INSERT INTO Players (Nickname, Rank) OUTPUT INSERTED.PlayerId VALUES (@Nickname, @Rank)";
+                string query = "INSERT INTO Players (Nickname, Rank, PasswordHash) VALUES (@Nickname, @Rank, @PasswordHash)";
 
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@Nickname", player.Nickname);
                     command.Parameters.AddWithValue("@Rank", player.Rank);
+                    command.Parameters.AddWithValue("@PasswordHash", player.PasswordHash);
 
-                    return (int)command.ExecuteScalar();
+                    command.ExecuteNonQuery();
                 }
             }
         }
 
-        public bool CheckPlayerExists(Player player)
+        public Player CheckPlayerExists(string nickname)
         {
-            using (SqlConnection connaction = db.CreateConnection())
+            using (SqlConnection connection = db.CreateConnection())
             {
-                connaction.Open();
-                string query = "Select Count(*) From Players Where Nickname =  @nik";
-                using (SqlCommand command = new SqlCommand(query, connaction))
+                connection.Open();
+
+                string query = "SELECT PlayerID, Nickname, Rank, PasswordHash FROM Players WHERE Nickname = @nik";
+
+                using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue("@nik", player.Nickname);
-                    int count = (int)command.ExecuteScalar();
-                    return count > 0;
+                    command.Parameters.AddWithValue("@nik", nickname);
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            Player player = new Player();
+
+                            player.Id = (int)reader["PlayerID"];
+                            player.Nickname = reader["Nickname"].ToString();
+                            player.Rank = (int)reader["Rank"];
+                            player.PasswordHash = reader["PasswordHash"].ToString();
+
+                            return player;
+                        }
+
+                        return null;
+                    }
                 }
-          
             }
-           
         }
 
         public void UpdateRank(Player player)

@@ -6,17 +6,19 @@ using System.Threading.Tasks;
 
 namespace Chess
 {
-    public class PlayerExistsException : Exception
-    {
-        public PlayerExistsException(string message) : base(message) 
-        {
-            
-        }
-    }
+
 
     public class PlayerDoesNotExistException : Exception
     {
         public PlayerDoesNotExistException(string message) : base(message)
+        {
+
+        }
+    }
+
+    public class IncorrectPasswordException : Exception
+    {
+        public IncorrectPasswordException(string message) : base(message)
         {
 
         }

@@ -10,13 +10,14 @@ namespace Models
     {
         public int Id { get; set; }
         public string Nickname { get; set; }
+        public string PasswordHash {  get; set; }
         public int Rank { get; set; } = 100;
         
+      
         public Player() { }
         public Player(string nick)
         {
             Nickname = nick;
-
         }
     }
 }
