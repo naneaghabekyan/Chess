@@ -5,7 +5,7 @@ namespace ChessAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class PlayersController : ControllerBase
+    public class playersController : ControllerBase
     {
 
         private GameService room = new GameService();

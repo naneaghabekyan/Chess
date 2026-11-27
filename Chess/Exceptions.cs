@@ -32,4 +32,25 @@ namespace Chess
         }
     }
 
+    public class EmptyRequestException : Exception
+    {
+        public EmptyRequestException(string message) : base(message)
+        {
+
+        }
+    }
+
+    public class InvalidNickOrPasException : Exception
+    {
+        public InvalidNickOrPasException(string message) : base(message)
+        {
+
+        }
+    }
+
+    public class NotUniqueNickException : Exception
+    {
+        public NotUniqueNickException(string message) : base(message) { }
+
+    }
 }

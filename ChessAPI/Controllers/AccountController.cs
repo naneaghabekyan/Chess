@@ -6,7 +6,7 @@ namespace ChessAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class AccountController : ControllerBase
+    public class accountController : ControllerBase
     {
 
         private AccountService account = new AccountService();
@@ -14,12 +14,35 @@ namespace ChessAPI.Controllers
         [HttpPost("register")]
         public IActionResult RegisterPlayer([FromBody] RegisterRequest request)
         {
-            account.RegisterPlayer(request.Nickname,request.Password);
+            try
+            {
+                //if (request == null)
+                //    throw EmptyRequestException("Empty request");
 
-            return Ok("Account has been created");
+                account.RegisterPlayer(request.Nickname, request.Password);
+
+                return Ok("Account has been created");
+            }
+            catch (EmptyRequestException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch(InvalidNickOrPasException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch(NotUniqueNickException ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
+        
         [HttpPost("login")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult Login([FromBody] RegisterRequest request)
         {
             try

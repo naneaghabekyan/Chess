@@ -27,6 +27,7 @@ namespace Data
                     command.Parameters.AddWithValue("@PasswordHash", player.PasswordHash);
 
                     command.ExecuteNonQuery();
+                   
                 }
             }
         }

@@ -16,13 +16,20 @@ namespace Chess
 
         public void RegisterPlayer(string nickname,string password)
         {
-
+            if (string.IsNullOrEmpty(nickname) || string.IsNullOrEmpty(password))
+                throw new InvalidNickOrPasException("Invalid nickname or password");
+            
             Player player = new Player(nickname);
 
             var pas = new PasswordHasher<Player>().HashPassword(player, password);
             player.PasswordHash = pas;
 
-            playerRepository.AddPlayer(player);
+            try
+            {
+                playerRepository.AddPlayer(player);
+            }
+            catch { throw new NotUniqueNickException("The nickname already exists"); }
+            
         }
 
 
@@ -38,7 +45,7 @@ namespace Chess
             {
                 JwtService jwtToken = new JwtService();
                 return jwtToken.GenerateToken(player);
-            }
+            } 
             else
             {
                 throw new IncorrectPasswordException("Incorrect password");

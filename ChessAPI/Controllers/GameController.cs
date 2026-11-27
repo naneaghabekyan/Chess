@@ -6,7 +6,7 @@ namespace ChessAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class GameController : ControllerBase
+    public class gameController : ControllerBase
     {
 
         private readonly GameService game;
@@ -18,7 +18,7 @@ namespace ChessAPI.Controllers
 
             return Ok("Player added to queue!");
         }
-        public GameController(GameService room)
+        public gameController(GameService room)
         {
             this.game = room;
         }
